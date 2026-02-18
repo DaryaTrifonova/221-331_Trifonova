@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-978b615075e7da0d72c1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Trifonova",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Trifonova::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Trifonova-Debug-e2711b1143614139d4b2.json",
+					"name" : "Trifonova",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Trifonova_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Trifonova_autogen-Debug-47585faf9a7e9141c577.json",
+					"name" : "Trifonova_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Trifonova_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Trifonova_autogen_timestamp_deps-Debug-1c2f824ac07dfe688591.json",
+					"name" : "Trifonova_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Study/Trifonova/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug",
+		"source" : "D:/Study/Trifonova"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
