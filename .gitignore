@@ -1,54 +1,44 @@
-# C++ objects and libs
-*.slo
-*.lo
-*.o
-*.a
-*.la
-*.lai
-*.so
-*.so.*
-*.dll
-*.dylib
+# Build dirs
+build*/
+cmake-build*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.ninja
+*.ninja_deps
+*.ninja_log
 
-# Qt-es
-object_script.*.Release
-object_script.*.Debug
-*_plugin_import.cpp
-/.qmake.cache
-/.qmake.stash
-*.pro.user
-*.pro.user.*
-*.qbs.user
-*.qbs.user.*
-*.moc
+# Qt Creator / IDE
+*.user
+*.pro.user*
+*.autosave
+.qtc_clangd/
+.qtcsettings
+qtcsettings.cmake
+
+# Qt generated
 moc_*.cpp
 moc_*.h
-qrc_*.cpp
 ui_*.h
-*.qmlc
-*.jsc
-Makefile*
-*build-*
-*.qm
-*.prl
+qrc_*.cpp
+*_autogen/
 
-# Qt unit tests
-target_wrapper.*
+# Objects / binaries
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.apk
 
-# QtCreator
-*.autosave
-
-# QtCreator Qml
-*.qmlproject.user
-*.qmlproject.user.*
-
-# QtCreator CMake
-CMakeLists.txt.user*
-
-# QtCreator 4.8< compilation database
-compile_commands.json
-
-# QtCreator local machine specific files for imported projects
-*creator.user*
-
-*_qmlcache.qrc
+# Debug / temp
+*.pdb
+*.ilk
+*.idb
+*.log
+*.tmp
+*.stash
