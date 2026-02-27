@@ -1,4 +1,5 @@
 # Build dirs
+Debug/
 build*/
 cmake-build*/
 CMakeFiles/
