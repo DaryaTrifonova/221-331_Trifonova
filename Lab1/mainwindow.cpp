@@ -48,58 +48,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-bool MainWindow::loadCredsFromJsonFile(const QString &path)
-{
-    creds_.clear();
-
-    QFile f(path);
-    if (!f.open(QIODevice::ReadOnly)) {
-        QMessageBox::critical(this, "Ошибка",
-                              "Не удалось открыть creds.json.\n"
-                              "Положи creds.json рядом с .exe/.bin.\n\nПуть:\n" + path);
-        return false;
-    }
-
-    const QByteArray data = f.readAll();
-    f.close();
-
-    if (data.size() < 2048) {
-        QMessageBox::warning(this, "Предупреждение",
-                             "creds.json меньше 2 КБ (нужно ≥ 2048 байт).\n"
-                             "Текущий размер: " + QString::number(data.size()) + " байт.");
-    }
-
-    QJsonParseError err{};
-    const QJsonDocument doc = QJsonDocument::fromJson(data, &err);
-    if (err.error != QJsonParseError::NoError || !doc.isArray()) {
-        QMessageBox::critical(this, "Ошибка",
-                              "creds.json не является JSON-массивом.\nОшибка: " + err.errorString());
-        return false;
-    }
-
-    const QJsonArray arr = doc.array();
-    for (const QJsonValue &v : arr) {
-        if (!v.isObject()) continue;
-        const QJsonObject o = v.toObject();
-
-        Cred c;
-        c.url = o.value("url").toString();
-        c.login = o.value("login").toString();
-        c.password = o.value("password").toString();
-
-        if (!c.url.isEmpty())
-            creds_.push_back(c);
-    }
-
-    if (creds_.size() < 10) {
-        QMessageBox::warning(this, "Предупреждение",
-                             "В creds.json меньше 10 учётных данных (нужно ≥ 10).\n"
-                             "Сейчас: " + QString::number(creds_.size()));
-    }
-
-    return true;
-}
-
 static QString maskByLen(const QString& s)
 {
     const int n = s.isEmpty() ? 3 : s.size();

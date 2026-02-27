@@ -17,44 +17,6 @@ static bool sha256KeyFromPin_Qt(const QString& pin, unsigned char key32[32])
     return true;
 }
 
-static bool decryptAes256Cbc_IvPrefix(const QByteArray& ivPlusCipher,
-                                      const unsigned char key32[32],
-                                      QByteArray& plainOut)
-{
-    if (ivPlusCipher.size() < 16) return false;
-
-    const unsigned char* iv = reinterpret_cast<const unsigned char*>(ivPlusCipher.constData());
-    const unsigned char* ct = reinterpret_cast<const unsigned char*>(ivPlusCipher.constData() + 16);
-    const int ctLen = ivPlusCipher.size() - 16;
-
-    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (!ctx) return false;
-
-    bool ok = false;
-    int len = 0, plainLen = 0;
-
-    plainOut.resize(ctLen + 16);
-
-    if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key32, iv) != 1) goto cleanup;
-
-    if (EVP_DecryptUpdate(ctx,
-                          reinterpret_cast<unsigned char*>(plainOut.data()), &len,
-                          ct, ctLen) != 1) goto cleanup;
-    plainLen = len;
-
-    if (EVP_DecryptFinal_ex(ctx,
-                            reinterpret_cast<unsigned char*>(plainOut.data()) + plainLen, &len) != 1) goto cleanup;
-    plainLen += len;
-
-    plainOut.resize(plainLen);
-    ok = true;
-
-cleanup:
-    EVP_CIPHER_CTX_free(ctx);
-    if (!ok) plainOut.clear();
-    return ok;
-}
-
 static const unsigned char IV_FIXED[16] = {
     0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
     0x08,0x09,0x10,0x11,0x12,0x13,0x14,0x15
@@ -90,19 +52,6 @@ cleanup:
     EVP_CIPHER_CTX_free(ctx);
     if (!ok) plainOut.clear();
     return ok;
-}
-
-static bool decryptFieldBase64(const QString& b64, const unsigned char key32[32], QString& out)
-{
-    const QByteArray blob = QByteArray::fromBase64(b64.toUtf8());
-    if (blob.isEmpty()) return false;
-
-    QByteArray plain;
-    if (!decryptAes256Cbc_FixedIv(blob, key32, IV_FIXED, plain))
-        return false;
-
-    out = QString::fromUtf8(plain);
-    return true;
 }
 
 static bool decryptFieldBase64Bytes(const QString& b64,
@@ -195,6 +144,7 @@ bool decryptVaultFromFile(const QString& vaultPath,
         const QJsonObject so = sdoc.object();
         c.login = so.value("login").toString();
         c.password = so.value("password").toString();
+
 
         if (c.login.isEmpty() || c.password.isEmpty()) {
             errorText = "Неверный формат secret";

@@ -22,7 +22,6 @@ public:
 
 private:
 
-    bool loadCredsFromJsonFile(const QString &path);
     void fillTable();
     void applyFilter(const QString &query);
     Ui::MainWindow *ui;
