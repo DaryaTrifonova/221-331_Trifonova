@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QObject>
+#include <QVector>
+#include "crypto_utils.h"
 
 namespace Ui {
 class NewPinDialog;
@@ -15,12 +17,14 @@ class NewPinDialog : public QDialog
 public:
     explicit NewPinDialog(QWidget *parent = nullptr);
     ~NewPinDialog();
+    const QVector<Cred>& creds() const { return creds_; }
 
 private slots:
     void on_unlockButton_clicked();
 
 private:
     Ui::NewPinDialog *ui;
+    QVector<Cred> creds_;
 };
 
 #endif // NEWPINDIALOG_H
