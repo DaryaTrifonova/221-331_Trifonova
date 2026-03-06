@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "newpindialog.h"
+#include "credviewdialog.h"
 
 #include <QFile>
 #include <QDir>
@@ -80,7 +81,7 @@ void MainWindow::applyFilter(const QString &query)
     const QString q = query.trimmed().toLower();
 
     for (int row = 0; row < ui->credsTable->rowCount(); ++row) {
-        auto *item = ui->credsTable->item(row, 0); // URL
+        auto *item = ui->credsTable->item(row, 0);
         const QString url = item ? item->text().toLower() : QString();
 
         const bool match = q.isEmpty() || url.contains(q);
@@ -102,15 +103,11 @@ void MainWindow::onCredDoubleClicked(int row, int /*column*/)
     const QString login = loginItem->data(Qt::UserRole).toString();
 
     NewPinDialog dlg;
-    if (dlg.exec() == QDialog::Accepted){
-        QMessageBox::information(
-            this,
-            "Учётные данные",
-            "Сайт: " + url + "\n" +
-                "Логин: " + login + "\n" +
-                "Пароль: " + realPassword
-            );
+    if (dlg.exec() == QDialog::Accepted) {
+        CredViewDialog credDlg(url, login, realPassword, this);
+        credDlg.exec();
     }
-
-
 }
+
+
+

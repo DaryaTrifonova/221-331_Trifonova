@@ -32,6 +32,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         newpindialog.h newpindialog.cpp newpindialog.ui
         crypto_utils.h crypto_utils.cpp
+        credviewdialog.h credviewdialog.cpp credviewdialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Trifonova APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
