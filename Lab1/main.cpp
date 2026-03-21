@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     qDebug() << "calculatedHash = " << calculatedHash.toHex();
 
     QByteArray requiredHash =
-        QByteArray::fromHex("afd2d19c6f36fbbd8f60993b61c6d6e59fae89620d844a7668114675fd7f9698");
+        QByteArray::fromHex("82d3d193ab22999791ae77a36bc336fe7858d0153b29c2b083ff85dbb52478ae");
     if(calculatedHash != requiredHash){
         QMessageBox::critical(
             nullptr,
