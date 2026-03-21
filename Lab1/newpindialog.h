@@ -2,7 +2,6 @@
 #define NEWPINDIALOG_H
 
 #include <QDialog>
-#include <QObject>
 #include <QVector>
 #include "crypto_utils.h"
 
@@ -17,7 +16,9 @@ class NewPinDialog : public QDialog
 public:
     explicit NewPinDialog(QWidget *parent = nullptr);
     ~NewPinDialog();
+
     const QVector<Cred>& creds() const { return creds_; }
+    QString acceptedPin() const { return acceptedPin_; }
 
 private slots:
     void on_unlockButton_clicked();
@@ -25,6 +26,7 @@ private slots:
 private:
     Ui::NewPinDialog *ui;
     QVector<Cred> creds_;
+    QString acceptedPin_;
 };
 
 #endif // NEWPINDIALOG_H

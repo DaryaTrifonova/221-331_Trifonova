@@ -21,7 +21,6 @@ public:
 private slots:
     void on_copyLoginButton_clicked();
     void on_copyPasswordButton_clicked();
-    void on_closeButton_clicked();
 
 private:
     Ui::CredViewDialog *ui;

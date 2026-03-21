@@ -1,5 +1,6 @@
 #include "newpindialog.h"
 #include "ui_newpindialog.h"
+
 #include <QTimer>
 #include <QDir>
 #include <QCoreApplication>
@@ -14,18 +15,20 @@ NewPinDialog::NewPinDialog(QWidget *parent)
 
 NewPinDialog::~NewPinDialog()
 {
+    secureClearQString(acceptedPin_);
     delete ui;
 }
 
 void NewPinDialog::on_unlockButton_clicked()
 {
-    const QString pin = ui->pinLineEdit->text();
+    QString pin = ui->pinLineEdit->text();
     const QString vaultPath = QDir(QCoreApplication::applicationDirPath()).filePath("vault.enc");
 
     QString err;
     QVector<Cred> tmp;
 
     if (!decryptVaultFromFile(vaultPath, pin, tmp, err)) {
+        secureClearQString(pin);
         ui->pinLineEdit->clear();
         ui->pinLineEdit->setFocus();
         ui->toastframe->show();
@@ -34,7 +37,9 @@ void NewPinDialog::on_unlockButton_clicked()
     }
 
     creds_ = std::move(tmp);
+    acceptedPin_ = pin;
+    secureClearQString(pin);
+
+    ui->pinLineEdit->clear();
     accept();
 }
-
-

@@ -21,13 +21,15 @@ public:
     ~MainWindow();
 
 private:
-
     void fillTable();
     void applyFilter(const QString &query);
-    Ui::MainWindow *ui;
-    QVector<Cred> creds_;
 
 private slots:
     void onCredDoubleClicked(int row, int column);
+
+private:
+    Ui::MainWindow *ui;
+    QVector<Cred> creds_;
 };
+
 #endif // MAINWINDOW_H

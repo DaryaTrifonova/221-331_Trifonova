@@ -29,12 +29,13 @@ int main(int argc, char *argv[])
     qDebug() << "calculatedHash = " << calculatedHash.toHex();
 
     QByteArray requiredHash =
-        QByteArray::fromHex("53b522c1d4e96502264d3aa9a4380898ea57c9f786c58d738ca0ce049511eb6f");
+        QByteArray::fromHex("afd2d19c6f36fbbd8f60993b61c6d6e59fae89620d844a7668114675fd7f9698");
     if(calculatedHash != requiredHash){
         QMessageBox::critical(
             nullptr,
             "Внимание!",
             "Обнаружена модификация приложения.");
+        return 0;
     }
 
 #ifdef _WIN32
