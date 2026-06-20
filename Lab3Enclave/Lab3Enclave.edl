@@ -1,0 +1,15 @@
+enclave {
+    from "sgx_tstdc.edl" import *;
+
+    trusted {
+        public int get_record_by_number(
+            int number,
+            [out, size=record_size] char* record,
+            size_t record_size);
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+
+    };
+};
