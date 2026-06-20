@@ -1,0 +1,2 @@
+﻿  passThrough.c
+D:\Study\221-331_Trifonova\Lab2\passThrough\passThrough.c(21,10): error C1083: Не удается открыть файл включение: fltKernel.h: No such file or directory,
